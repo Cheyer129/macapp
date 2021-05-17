@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Chase Satisfactions</title>
+{% endblock %}
+
+{% block body %}
+<div class="content_index">
+    <h1>Chase Satisfactions</h1>
+    <div class="form_index">
+        <form action="/" method="POST">
+            <label for="borrower">Borrower:</label>
+            <br>
+            <input type="text" name="borrower" id="borrower">
+            <br>
+            
+            <label for="loan_number">Loan Number:</label>
+            <br>
+            <input type="text" name="loan_number" id="loan_number">
+            <br>
+
+            <label for="heloc_number">HELOC Number:</label>
+            <br>
+            <input type="text" name="heloc_number" id="heloc_number">
+            <br>
+            
+            <label for="contact">Contact:</label>
+            <br>
+            <input type="text" name="contact" id="contact">
+            <br>
+            
+            <label for="contact_email">Contact Email:</label>
+            <br>
+            <input type="text" name="contact_email" id="contact_email">
+            <br>
+            
+            <label for="phone_number">Phone:</label>
+            <br>
+            <input type="text" name="phone_number" id="phone_number">
+            <br>
+            
+            <label for="residents">Residents:</label>
+            <br>
+            <input type="text" name="residents" id="residents">
+            <br>
+            
+            <label for="street_address">Street Address:</label>
+            <br>
+            <input type="text" name="street_address" id="street_address">
+            <br>
+            
+            <label for="city_state_zip">CityStateZip:</label>
+            <br>
+            <input type="text" name="city_state_zip" id="city_state_zip">
+            <br>
+
+            <input type="checkbox" id="send_notice_index" name="send_notice" value=False>
+            <label for="send_notice"> Send Notice</label>
+            <br>
+
+            <label for="loan_type">Loan Type:</label>
+            <select name="loan_type" id="loan_type">
+                <option disabled selected value="">Loan Type</option>
+                <option value="CEMA">CEMA</option>
+                <option value="CEMA HELOC">CEMA HELOC</option>
+                <option value="Coop">Coop</option>
+                <option value="Coop 1st + HELOC">Coop 1st + HELOC</option>
+                <option value="Coop HELOC">Coop HELOC</option>
+            </select>
+            <br>
+            <br>
+
+            <input type="submit" value="Add Payoff">
+        </form>
+    </div>
+    <div class="content_table">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Loan Number</th>
+            <th>Loan Type</th>
+            <th>Date</th>
+            <th>Documents Received</th>
+            <th>New Lender Info.</th>
+            <th>Closing Date</th>
+            <th>Funding Date</th>
+            <th>Cancel Date</th>
+            <th>Fedex Tracking:</th>
+        </tr>
+        {% for payoff in payoffs %}
+            <tr>
+                <td>{{ payoff.borrower }}</td>
+                <td>{{ payoff.loan_number }}</td>
+                <td>{{ payoff.loan_type }}</td>
+                <td>{{ payoff.date_created.date() }}</td>
+                <td>{{ payoff.documents_received }}</td>
+                <td>{{ payoff.new_lender_info }}</td>
+                <td>{{ payoff.closing_date }}</td>
+                <td>{{ payoff.funding_date }}</td>
+                <td>{{ payoff.cancel_date }}</td>
+                <td>{{ payoff.fedex_no }}</td>
+                <td>
+                    <a href="/delete/{{payoff.id}}">Delete</a>
+                    <br>
+                    <a href="/update/{{payoff.id}}">Update</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
+</div>
+{% endblock %}
