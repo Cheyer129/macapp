@@ -23,3 +23,7 @@ td {
     text-align: center;
     padding: 5px;
 }
+
+#closing_date_label {
+    margin-left: 200px;
+}
