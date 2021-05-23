@@ -103,14 +103,14 @@ def update(id):
         payoff.funding_date = request.form['funding_date']
         payoff.cancel_date = request.form['cancel_date']
         payoff.fedex_no = request.form['fedex_no']
-        payoff.documents_received = request.form['docs_received']
-        payoff.new_lender_info = request.form['new_lender_info']
+        # payoff.documents_received = request.form['docs_received']
+        # payoff.new_lender_info = request.form['new_lender_info']
 
-        try:
-            db.session.commit()
-            return redirect('/')
-        except:
-            return 'There was an issue updating your payoff'
+        # try:
+        db.session.commit()
+        return redirect('/')
+        # except:
+            # return 'There was an issue updating your payoff'
 
     else:
         return render_template('update.html', payoff=payoff)

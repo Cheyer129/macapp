@@ -12,7 +12,7 @@
   /* Create two equal columns that floats next to each other */
 .column {
     float: left;
-    width: 40%;
+    width: 50%;
     padding: 10px; /* Should be removed. Only for demonstration */
 }
   
@@ -25,88 +25,87 @@
 </style>
 </head>
 <body>
-    <h2>Two Equal Columns</h2>
-    
-    <div class="row">
-        <div class="column" style="background-color: lightgrey;">
-        <h2>Column 1</h2>
-        <label for="borrower" id="borrower">Borrower:</label>
-        <br>
-        <input type="text" name="borrower" id="borrower" value="{{payoff.borrower}}">
-        <br>
-        <label for="loan_number">Loan Number:</label>
-        <br>
-        <input type="text" name="loan_number" id="loan_number" value="{{payoff.loan_number}}">
-        <br>
-        <label for="heloc_number">HELOC Number:</label>
-        <br>
-        <input type="text" name="heloc_number" id="heloc_number">
-        <br>
-        <label for="contact">Contact:</label>
-        <br>
-        <input type="text" name="contact" id="contact" value="{{payoff.contact}}">
-        <br>
-        <label for="contact_email">Contact Email:</label>
-        <br>
-        <input type="text" name="contact_email" id="contact_email" value="{{payoff.contact_email}}">
-        <br>
-        <label for="phone_number">Phone:</label>
-        <br>
-        <input type="text" name="phone_number" id="phone_number" value="{{payoff.phone_number}}">
-        <br>
-        <label for="residents">Residents:</label>
-        <br>
-        <input type="text" name="residents" id="residents" value="{{payoff.residents}}">
-        <br>
-        <label for="street_address">Street Address:</label>
-        <br>
-        <input type="text" name="street_address" id="street_address" value="{{payoff.street_address}}">
-        <br>
-        <label for="city_state_zip">CityStateZip:</label>
-        <br>
-        <input type="text" name="city_state_zip" id="city_state_zip" value="{{payoff.city_state_zip}}">
-        <br>
-        <label for="loan_type">Loan Type:</label>
-        <select name="loan_type" id="loan_type" value="{{payoff.loan_type}}">
-            <option value="CEMA">CEMA</option>
-            <option value="CEMA HELOC">CEMA HELOC</option>
-            <option value="Coop">Coop</option>
-            <option value="Coop 1st + HELOC">Coop 1st + HELOC</option>
-            <option value="Coop HELOC">Coop HELOC</option>
-        </select>
-        <br>
+    <h1 style="text-align: center">Update Payoff</h1>
+    <form action="/update/{{payoff.id}}" method="POST">
+        <div class="row">
+            <div class="column" style="background-color: lightgrey;">
+                <label for="borrower" id="borrower">Borrower:</label>
+                <br>
+                <input type="text" name="borrower" id="borrower" value="{{payoff.borrower}}">
+                <br>
+                <label for="loan_number">Loan Number:</label>
+                <br>
+                <input type="text" name="loan_number" id="loan_number" value="{{payoff.loan_number}}">
+                <br>
+                <label for="heloc_number">HELOC Number:</label>
+                <br>
+                <input type="text" name="heloc_number" id="heloc_number">
+                <br>
+                <label for="contact">Contact:</label>
+                <br>
+                <input type="text" name="contact" id="contact" value="{{payoff.contact}}">
+                <br>
+                <label for="contact_email">Contact Email:</label>
+                <br>
+                <input type="text" name="contact_email" id="contact_email" value="{{payoff.contact_email}}">
+                <br>
+                <label for="phone_number">Phone:</label>
+                <br>
+                <input type="text" name="phone_number" id="phone_number" value="{{payoff.phone_number}}">
+                <br>
+                <label for="residents">Residents:</label>
+                <br>
+                <input type="text" name="residents" id="residents" value="{{payoff.residents}}">
+                <br>
+                <label for="street_address">Street Address:</label>
+                <br>
+                <input type="text" name="street_address" id="street_address" value="{{payoff.street_address}}">
+                <br>
+                <label for="city_state_zip">CityStateZip:</label>
+                <br>
+                <input type="text" name="city_state_zip" id="city_state_zip" value="{{payoff.city_state_zip}}">
+                <br>
+                <label for="loan_type">Loan Type:</label>
+                <select name="loan_type" id="loan_type" value="{{payoff.loan_type}}">
+                    <option value="CEMA">CEMA</option>
+                    <option value="CEMA HELOC">CEMA HELOC</option>
+                    <option value="Coop">Coop</option>
+                    <option value="Coop 1st + HELOC">Coop 1st + HELOC</option>
+                    <option value="Coop HELOC">Coop HELOC</option>
+                </select>
+                <br>
+                <input type="submit" value="Update">
+            </div>
+            <div class="column" style="background-color:grey;">
+                <label for="closing_date_form" id="closing_date_label">Closing Date:</label>
+                <br>
+                <input type="text" name="closing_date" id="closing_date_form" value="{{payoff.closing_date}}">
+                <br>
+                <label for="funding_date_form" id="funding_date_label">Funding Date:</label>
+                <br>
+                <input type="text" name="funding_date" id="funding_date_form" value="{{payoff.funding_date}}">
+                <br>
+                <label for="cancel_date_form" id="cancel_date_label">Cancel Date:</label>
+                <br>
+                <input type="text" name="cancel_date" id="cancel_date_form" value="{{payoff.cancel_date}}">
+                <br>
+                <label for="fedex_no_form" id="fedex_no_label">Fedex Tracking:</label>
+                <br>
+                <input type="text" name="fedex_no" id="fedex_no_form" value="{{payoff.fedex_no}}">
+                <br>
+                <input type="checkbox" name="docs_received" id="docs_received" value=False>
+                <label for="docs_received">Doc's Received</label>
+                <br>
+                <input type="checkbox" name="new_lender_info" id="new_lender_info" value=False>
+                <label for="new_lender_info"> Assingee Info + Mortgage Schedule</label>
+                <br>
+                <label for="comment" id="comment-label">Comments:</label>
+                <br>
+                <textarea id="comment-update" name="comment" rows="4" columns="15">
+                    {{ payoff.file_comment }}
+                </textarea>
+            </div>
         </div>
-        <div class="column" style="background-color:grey;">
-        <h2>Column 2</h2>
-        <label for="closing_date_form" id="closing_date_label">Closing Date:</label>
-        <br>
-        <input type="text" name="closing_date" id="closing_date_form" value="{{payoff.closing_date}}">
-        <br>
-        <label for="funding_date_form" id="funding_date_label">Funding Date:</label>
-        <br>
-        <input type="text" name="funding_date" id="funding_date_form" value="{{payoff.funding_date}}">
-        <br>
-        <label for="cancel_date_form" id="cancel_date_label">Cancel Date:</label>
-        <br>
-        <input type="text" name="cancel_date" id="cancel_date_form" value="{{payoff.cancel_date}}">
-        <br>
-        <label for="fedex_no_form" id="fedex_no_label">Fedex Tracking:</label>
-        <br>
-        <input type="text" name="fedex_no" id="fedex_no_form" value="{{payoff.fedex_no}}">
-        <br>
-        <input type="checkbox" name="docs_received" id="docs_received" value=False>
-        <label for="docs_received">Doc's Received</label>
-        <br>
-        <input type="checkbox" name="new_lender_info" id="new_lender_info" value=False>
-        <label for="new_lender_info"> Assingee Info + Mortgage Schedule</label>
-        <br>
-        <label for="comment" id="comment-label">Comments:</label>
-        <br>
-        <textarea id="comment-update" name="comment" rows="4" columns="15">
-            {{ payoff.file_comment }}
-        </textarea>
-        </div>
-    </div>
-    
+    </form>
 </body>
 </html>
