@@ -104,7 +104,8 @@ def update(id):
         payoff.cancel_date = request.form['cancel_date']
         payoff.fedex_no = request.form['fedex_no']
         payoff.file_comment = request.form['comment']
-        # print(request.form['docs_receieved'])
+        print(request.form['docs_received'])
+        print(request.form['new_lender_info'])
         
         try:
             db.session.commit()
