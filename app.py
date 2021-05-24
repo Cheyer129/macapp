@@ -13,9 +13,9 @@ db = SQLAlchemy(app)
 # start up python "python(3)" in terminal
 # creating the db
 # from app import db
-# db.creat_all()
+# db.create_all()
 
-class Todo(db.Model):
+class Payoff(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     borrower = db.Column(db.String(25), nullable=False)
     loan_number = db.Column(db.String(10), nullable=True)
@@ -53,7 +53,7 @@ def index():
         f_residents = request.form['residents']
         f_street_address = request.form['street_address']
         f_city_state_zip = request.form['city_state_zip']
-        new_file = Todo(borrower=f_borrower, loan_number=f_loan_number,
+        new_file = Payoff(borrower=f_borrower, loan_number=f_loan_number,
                         loan_type=f_loan_type, contact=f_contact, contact_email=f_contact_email, 
                         phone_number=f_phone_number, residents=f_residents,
                         street_address=f_street_address, city_state_zip=f_city_state_zip)
@@ -66,14 +66,14 @@ def index():
             return 'There was an issue adding your payoff'
 
     else:
-        payoffs = Todo.query.order_by(Todo.date_created).all()
+        payoffs = Payoff.query.order_by(Payoff.date_created).all()
         return render_template('index.html', payoffs=payoffs)
 
 
 # Delete
 @app.route('/delete/<int:id>')
 def delete(id):
-    payoff_to_delete = Todo.query.get_or_404(id)
+    payoff_to_delete = Payoff.query.get_or_404(id)
 
     try:
         db.session.delete(payoff_to_delete)
@@ -86,12 +86,12 @@ def delete(id):
 # Update
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 def update(id):
-    payoff = Todo.query.get_or_404(id)
+    payoff = Payoff.query.get_or_404(id)
 
     if request.method == 'POST':
         payoff.borrower = request.form['borrower']
         payoff.loan_number = request.form['loan_number']
-        payoff.heloc_number = request
+        payoff.heloc_number = request.form['heloc_number']
         payoff.contact = request.form['contact']
         payoff.contact_email = request.form['contact_email']
         payoff.phone_number = request.form['phone_number']
@@ -103,14 +103,14 @@ def update(id):
         payoff.funding_date = request.form['funding_date']
         payoff.cancel_date = request.form['cancel_date']
         payoff.fedex_no = request.form['fedex_no']
-        # payoff.documents_received = request.form['docs_received']
-        # payoff.new_lender_info = request.form['new_lender_info']
-
-        # try:
-        db.session.commit()
-        return redirect('/')
-        # except:
-            # return 'There was an issue updating your payoff'
+        payoff.file_comment = request.form['comment']
+        # print(request.form['docs_receieved'])
+        
+        try:
+            db.session.commit()
+            return redirect('/')
+        except:
+            return 'There was an issue updating your payoff'
 
     else:
         return render_template('update.html', payoff=payoff)
