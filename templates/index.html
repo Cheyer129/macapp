@@ -91,8 +91,8 @@
             <td>{{ payoff.borrower }}</td>
             <td>{{ payoff.loan_number }}</td>
             <td>{{ payoff.loan_type }}</td>
-            <td>{{ payoff.date_created.date() }}</td>
-            <td>{{ payoff.documents_received }}</td>
+            <td>{{ '{}/{}/{}'.format(payoff.date_created.date().strftime("%m"), payoff.date_created.date().strftime("%d"), payoff.date_created.date().strftime("%y")) }}</td>
+            <td>{{ '{}/{}/{}'.format(payoff.documents_received.date().strftime("%m"), payoff.documents_received.date().strftime("%d"), payoff.documents_received.date().strftime("%y")) }}</td>
             <td>{{ payoff.new_lender_info }}</td>
             <td>{{ payoff.closing_date }}</td>
             <td>{{ payoff.funding_date }}</td>

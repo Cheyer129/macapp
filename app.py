@@ -36,6 +36,10 @@ class Payoff(db.Model):
     fedex_no = db.Column(db.String(14), nullable=True)
     file_comment = db.Column(db.String(120), nullable=True)
 
+    # A function telling us how old the file is
+    # def days_old(self):
+
+
 
     def __repr__(self):
         return '<Payoff %r>' % self.id
@@ -104,9 +108,21 @@ def update(id):
         payoff.cancel_date = request.form['cancel_date']
         payoff.fedex_no = request.form['fedex_no']
         payoff.file_comment = request.form['comment']
-        print(request.form['docs_received'])
-        print(request.form['new_lender_info'])
-        
+        if request.form['docs_received'] == 'on':
+            payoff.documents_received = datetime.today()
+        if request.form['new_lender_info'] == 'on':
+            payoff.new_lender_info == True
+        try:
+            print(request.form['docs_received'])
+        except:
+            print('could not print')
+        try:
+            print(request.form['new_lender_info'])
+        except:
+            print('could not print')
+
+
+
         try:
             db.session.commit()
             return redirect('/')
